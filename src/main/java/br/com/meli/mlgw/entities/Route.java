@@ -1,6 +1,6 @@
 package br.com.meli.mlgw.entities;
 
-public class Routes {
+public class Route {
 
   private Integer id;
   private String pathDestination;
@@ -23,16 +23,16 @@ public class Routes {
     return maxRequestPerSecond;
   }
 
-  public Routes() { }
+  public Route() { }
 
-  private Routes(Integer id, String pathDestination, String originIp, Integer maxRequestPerSecond) {
+  private Route(Integer id, String pathDestination, String originIp, Integer maxRequestPerSecond) {
     this.id = id;
     this.pathDestination = pathDestination;
     this.originIp = originIp;
     this.maxRequestPerSecond = maxRequestPerSecond;
   }
 
-  public static Routes valueOf(Integer id, String pathDestination, String originIp, Integer maxRequestPerSecond){
-    return new Routes(id, pathDestination, originIp, maxRequestPerSecond);
+  public static Route valueOf(Integer id, String pathDestination, String originIp, Integer maxRequestPerSecond){
+    return new Route(id, pathDestination, originIp, maxRequestPerSecond);
   }
 }
