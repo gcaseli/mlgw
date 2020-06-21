@@ -1,3 +1,5 @@
+server:
+  port: 8081
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/gatewatdb
@@ -10,5 +12,8 @@ spring:
           dialect: org.hibernate.dialect.PostgreSQLDialec
   application:
     name: mlgw
-server:
-  port: 8081
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui-custom.html
