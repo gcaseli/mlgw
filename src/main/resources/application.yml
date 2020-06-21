@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gatewatdb
+    platform: postgres
+    username: postgres
+    password: admin
+    jpa:
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialec
+  application:
+    name: mlgw
+server:
+  port: 8081
