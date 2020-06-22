@@ -1,6 +1,6 @@
 package br.com.meli.mlgw;
 
-import br.com.meli.mlgw.entities.Route;
+import br.com.meli.mlgw.entities.RouteML;
 import br.com.meli.mlgw.entities.UriMeliConfiguration;
 import br.com.meli.mlgw.externals.database.RouteRepository;
 import java.util.List;
@@ -27,17 +27,15 @@ public class MlgwApplication {
 	@Bean
 	public RouteLocator routes(RouteLocatorBuilder builder, UriMeliConfiguration uriConfiguration) {
 
-		List<Route> routesDatabase = repository.retrieveRoutes();
-
-		String httpUri = uriConfiguration.getHttpbin();
+		List<RouteML> routesDatabase = repository.retrieveRoutes();
 
 		Builder routes = builder.routes();
 
-		for (Route r : routesDatabase) {
+		for (RouteML r : routesDatabase) {
 			routes
 					.route(p -> p
 							.path(r.getPathDestination())
-							.uri(httpUri));
+							.uri(uriConfiguration.getHttpbin()));
 		}
 
 		return routes.build();

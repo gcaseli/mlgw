@@ -1,11 +1,11 @@
 package br.com.meli.mlgw.externals.database;
 
-import br.com.meli.mlgw.entities.Route;
+import br.com.meli.mlgw.entities.RouteML;
 import java.util.List;
 
 public interface RouteRepository {
 
-  List<Route> retrieveRoutes();
+  List<RouteML> retrieveRoutes();
 
-  Route createNewRoute(Route route);
+  RouteML createNewRoute(RouteML routeML);
 }

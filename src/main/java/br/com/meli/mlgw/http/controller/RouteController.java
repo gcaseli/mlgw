@@ -1,13 +1,15 @@
 package br.com.meli.mlgw.http.controller;
 
-import br.com.meli.mlgw.entities.Route;
+import br.com.meli.mlgw.entities.RouteML;
+import br.com.meli.mlgw.entities.UriMeliConfiguration;
 import br.com.meli.mlgw.usecases.routes.RouteUCService;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.gateway.route.RouteLocator;
+import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,9 +27,18 @@ public class RouteController {
   @Autowired
   private RouteUCService routesUCService;
 
+  @Autowired
+  private RouteLocatorBuilder routeLocatorBuilder;
+
+  @Autowired
+  private RouteLocator routeLocator;
+
+  @Autowired
+  private UriMeliConfiguration uriConfiguration;
+
   @Operation(description = "Apresenta todas as rotas")
   @GetMapping("/")
-  public List<Route> findAllRoutes() {
+  public List<RouteML> findAllRoutes() {
     return routesUCService.retrieveRoutes();
   }
 
@@ -35,18 +46,21 @@ public class RouteController {
   @ApiResponse(responseCode = "201", description = "Rota criada")
   @ResponseStatus(HttpStatus.OK)
   @PostMapping(value = "/")
-  public ResponseEntity<Route> createNewRoute(@RequestBody RouteRequest request) {
+  public ResponseEntity<RouteML> createNewRoute(@RequestBody RouteRequest request) {
 
     if (request == null || request.getPathDestination() == null) {
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    Route newRoute = routesUCService.createNewRoute(Route
+    RouteML newRouteML = routesUCService.createNewRoute(RouteML
         .createNewRoute(request.getPathDestination(), request.getOriginIp(),
             request.getMaxRequestPerSecond()));
 
-    return new ResponseEntity<>(newRoute, HttpStatus.OK);
+    //routesUCService.buildRoutes();
+
+    return new ResponseEntity<>(newRouteML, HttpStatus.OK);
 
   }
+
 
 }

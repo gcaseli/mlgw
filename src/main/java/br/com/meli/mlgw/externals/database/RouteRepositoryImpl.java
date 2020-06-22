@@ -1,8 +1,6 @@
 package br.com.meli.mlgw.externals.database;
 
-import br.com.meli.mlgw.entities.Route;
-import com.google.common.base.Charsets;
-import java.sql.Types;
+import br.com.meli.mlgw.entities.RouteML;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -21,9 +19,9 @@ public class RouteRepositoryImpl implements RouteRepository{
   @Autowired
   private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-  public List<Route> retrieveRoutes() {
+  public List<RouteML> retrieveRoutes() {
 
-    return namedParameterJdbcTemplate.query(SELECT_FROM_ROUTE, (rs, rowNumber) -> Route.valueOf(
+    return namedParameterJdbcTemplate.query(SELECT_FROM_ROUTE, (rs, rowNumber) -> RouteML.valueOf(
         rs.getInt("id"),
         rs.getString(PATH_DESTINATION),
         rs.getString(ORIGIN_IP),
@@ -32,12 +30,12 @@ public class RouteRepositoryImpl implements RouteRepository{
   }
 
   @Override
-  public Route createNewRoute(Route route) {
+  public RouteML createNewRoute(RouteML routeML) {
 
     MapSqlParameterSource params = new MapSqlParameterSource();
-    params.addValue(PATH_DESTINATION, route.getPathDestination());
-    params.addValue(ORIGIN_IP, route.getOriginIp());
-    params.addValue(MAX_REQUEST_PER_SECOND, route.getMaxRequestPerSecond());
+    params.addValue(PATH_DESTINATION, routeML.getPathDestination());
+    params.addValue(ORIGIN_IP, routeML.getOriginIp());
+    params.addValue(MAX_REQUEST_PER_SECOND, routeML.getMaxRequestPerSecond());
 
     String query = INSERT
         + "(select nextval('sq_route_id')), "
