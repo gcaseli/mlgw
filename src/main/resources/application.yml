@@ -7,7 +7,8 @@ server:
   port: 8081
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/gatewatdb
+    #url: jdbc:postgresql://localhost:5432/gatewatdb
+    url: jdbc:postgresql://postgresql:5432/gatewatdb
     platform: postgres
     username: postgres
     password: admin

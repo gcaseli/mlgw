@@ -18,9 +18,9 @@ services:
     restart: unless-stopped
   # APP*****************************************
   springbootapp:
-    image: gatewayapp:latest
+    image: mlgw:latest
     network_mode: bridge
-    container_name: gatewayapp
+    container_name: mlgw
     expose:
       - 8080
     ports:
