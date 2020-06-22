@@ -16,4 +16,9 @@ public class RouteUCServiceImpl implements RouteUCService {
   public List<Route> retrieveRoutes(){
     return routeRepository.retrieveRoutes();
   }
+
+  @Override
+  public Route createNewRoute(Route route) {
+    return routeRepository.createNewRoute(route);
+  }
 }

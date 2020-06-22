@@ -35,4 +35,8 @@ public class Route {
   public static Route valueOf(Integer id, String pathDestination, String originIp, Integer maxRequestPerSecond){
     return new Route(id, pathDestination, originIp, maxRequestPerSecond);
   }
+
+  public static Route createNewRoute(String pathDestination, String originIp, Integer maxRequestPerSecond){
+    return new Route(null, pathDestination, originIp, maxRequestPerSecond);
+  }
 }

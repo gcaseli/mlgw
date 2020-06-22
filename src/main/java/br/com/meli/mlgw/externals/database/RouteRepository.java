@@ -6,4 +6,6 @@ import java.util.List;
 public interface RouteRepository {
 
   List<Route> retrieveRoutes();
+
+  Route createNewRoute(Route route);
 }

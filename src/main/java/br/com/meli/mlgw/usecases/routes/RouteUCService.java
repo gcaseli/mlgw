@@ -6,4 +6,6 @@ import java.util.List;
 public interface RouteUCService {
 
   List<Route> retrieveRoutes();
+
+  Route createNewRoute(Route route);
 }
