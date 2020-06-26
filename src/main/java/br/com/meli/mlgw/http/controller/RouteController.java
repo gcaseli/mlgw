@@ -1,14 +1,12 @@
 package br.com.meli.mlgw.http.controller;
 
 import br.com.meli.mlgw.entities.RouteML;
-import br.com.meli.mlgw.entities.UriMeliConfiguration;
 import br.com.meli.mlgw.usecases.routes.RouteUCService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,12 +28,6 @@ public class RouteController {
   @Autowired
   private RouteLocatorBuilder routeLocatorBuilder;
 
-  @Autowired
-  private RouteLocator routeLocator;
-
-  @Autowired
-  private UriMeliConfiguration uriConfiguration;
-
   @Operation(description = "Apresenta todas as rotas")
   @GetMapping("/")
   public List<RouteML> findAllRoutes() {
@@ -56,11 +48,9 @@ public class RouteController {
         .createNewRoute(request.getPathDestination(), request.getOriginIp(),
             request.getMaxRequestPerSecond()));
 
-    //routesUCService.buildRoutes();
+    routesUCService.updateGatewayRoutes();
 
     return new ResponseEntity<>(newRouteML, HttpStatus.OK);
 
   }
-
-
 }

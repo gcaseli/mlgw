@@ -1,44 +1,28 @@
 package br.com.meli.mlgw;
 
-import br.com.meli.mlgw.entities.RouteML;
-import br.com.meli.mlgw.entities.UriMeliConfiguration;
-import br.com.meli.mlgw.externals.database.RouteRepository;
-import java.util.List;
+import br.com.meli.mlgw.usecases.routes.RouteUCService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.cloud.gateway.route.RouteLocator;
-import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
-import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder.Builder;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 
 @SpringBootApplication
-@EnableConfigurationProperties(UriMeliConfiguration.class)
 public class MlgwApplication {
 
 	@Autowired
-	private RouteRepository repository;
+	private RouteUCService service;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MlgwApplication.class, args);
 	}
-	
-	@Bean
-	public RouteLocator routes(RouteLocatorBuilder builder, UriMeliConfiguration uriConfiguration) {
 
-		List<RouteML> routesDatabase = repository.retrieveRoutes();
-
-		Builder routes = builder.routes();
-
-		for (RouteML r : routesDatabase) {
-			routes
-					.route(p -> p
-							.path(r.getPathDestination())
-							.uri(uriConfiguration.getHttpbin()));
-		}
-
-		return routes.build();
+	/**
+	 * Put all start-up code to this method.
+	 */
+	@EventListener(ApplicationReadyEvent.class)
+	public void startup() {
+		service.updateGatewayRoutes();
 	}
 
 }

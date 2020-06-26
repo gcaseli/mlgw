@@ -9,5 +9,5 @@ public interface RouteUCService {
 
   RouteML createNewRoute(RouteML routeML);
 
-  //void buildRoutes();
+  void updateGatewayRoutes();
 }

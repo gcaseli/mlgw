@@ -13,13 +13,13 @@ public class GatewayRoutesRefresher implements ApplicationEventPublisherAware {
 
   private ApplicationEventPublisher publisher;
 
-  public void refreshRoutes() {
-    publisher.publishEvent(new RefreshRoutesEvent(this));
-  }
-
   @Override
   public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
     publisher = applicationEventPublisher;
+  }
+
+  public void refreshRoutes() {
+    publisher.publishEvent(new RefreshRoutesEvent(this));
   }
 
 }
