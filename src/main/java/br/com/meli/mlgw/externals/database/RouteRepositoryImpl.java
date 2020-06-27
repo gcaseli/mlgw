@@ -7,6 +7,9 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Classe responsável por realizar a integração com o banco de dados onde as rotas estão salvas.
+ */
 @Repository
 public class RouteRepositoryImpl implements RouteRepository{
 

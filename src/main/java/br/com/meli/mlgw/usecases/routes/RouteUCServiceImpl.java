@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.stereotype.Service;
 
+/**
+ * Classe responsável para casos de uso referente a rotas como busca, criação e atualização
+ */
 @Service
 public class RouteUCServiceImpl implements RouteUCService {
 
@@ -20,13 +23,13 @@ public class RouteUCServiceImpl implements RouteUCService {
   @Autowired
   private RouteLocatorBuilder routeLocatorBuilder;
 
+  @Value("${httpbin}")
+  private String httpbin;
+
   @Override
   public List<RouteML> retrieveRoutes(){
     return routeRepository.retrieveRoutes();
   }
-
-  @Value("${httpbin}")
-  private String httpbin;
 
   @Override
   public RouteML createNewRoute(RouteML routeML) {

@@ -15,7 +15,7 @@ import reactor.core.publisher.Flux;
  * Classe responsável por atualizar as rotas de forma dinamica em tempo de execução.
  */
 @Component
-public class RefreshableRoutesLocator  implements RouteLocator {
+public class RefreshableRoutesLocator implements RouteLocator {
 
   private final RouteLocatorBuilder builder;
   private final GatewayRoutesRefresher gatewayRoutesRefresher;
@@ -63,7 +63,7 @@ public class RefreshableRoutesLocator  implements RouteLocator {
 
   @Override
   public Flux<Route> getRoutes() {
-    if (route == null){
+    if (route == null) {
       clearRoutes();
       addRoute();
       route = routesBuilder.build().getRoutes();

@@ -18,7 +18,7 @@ public class MlgwApplication {
 	}
 
 	/**
-	 * Put all start-up code to this method.
+	 * Cria as rotas.
 	 */
 	@EventListener(ApplicationReadyEvent.class)
 	public void startup() {

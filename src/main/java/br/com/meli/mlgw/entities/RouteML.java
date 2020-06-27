@@ -1,5 +1,8 @@
 package br.com.meli.mlgw.entities;
 
+/**
+ * Classe que representa as rotas que o sistema cuida
+ */
 public class RouteML {
 
   private Integer id;
