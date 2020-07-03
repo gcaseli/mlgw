@@ -41,6 +41,7 @@ public class RefreshableRoutesLocator implements RouteLocator {
 
   public void clearRoutes() {
     routesBuilder = builder.routes();
+    route = null;
   }
 
   public void buildRoutes() {
